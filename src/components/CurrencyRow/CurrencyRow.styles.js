@@ -20,4 +20,9 @@ export const CurrencySelect = styled(Select)`
     }
 `;
 
-export const CurrencyInput = styled(TextField)``;
+export const CurrencyInput = styled(TextField)`
+    input::-webkit-inner-spin-button,
+    input::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+    }
+`;

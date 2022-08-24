@@ -27,7 +27,7 @@ const CurrencyRow = ({
                 placeholder='0'
                 variant='standard'
                 type='number'
-                value={!amount ? 0 : amount.length ? amount : Number(amount).toFixed(2)}
+                value={!amount ? '' : amount.length ? amount : Number(amount).toFixed(2)}
                 onChange={onChangeAmount}
                 InputProps={{
                     disableUnderline: true,

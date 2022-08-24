@@ -58,11 +58,15 @@ const App = () => {
     }, [convertFrom, convertTo]);
 
     const handleFromChangeAmount = (e) => {
-        setAmount(e.target.value);
+        let value = e.target.value;
+        if (value < 0) value = 0;
+        setAmount(value);
         setAmountInFromCurrency(true);
     };
     const handleToChangeAmount = (e) => {
-        setAmount(e.target.value);
+        let value = e.target.value;
+        if (value < 0) value = 0;
+        setAmount(value);
         setAmountInFromCurrency(false);
     };
 
