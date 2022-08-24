@@ -58,7 +58,6 @@ const Main = ({
                     }}
                 />
                 <CurrencyRow
-                    disabled={true}
                     currencies={currencies}
                     selectedCurrency={convertTo}
                     onChangeCurrency={(e) => setConvertTo(e.target.value)}

@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import Header from './components/Header';
 import Main from './components/Main';
+import { instance } from './utils/instance';
+import { getCurrency } from './utils/getCurrency';
 import { GlobalStyle } from './styles/GlobalStyles';
-
-const baseURL = 'https://api.apilayer.com/exchangerates_data/latest';
 
 const App = () => {
     const [currencies, setCurrencies] = useState([]);
@@ -27,16 +26,12 @@ const App = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const headers = { apikey: 'NclmKi9tsiZKmhZBJbpr9cLbFFzVa8NA' };
-            const { data } = await axios.get(baseURL, { headers });
-            const firstCurrency = Object.keys(data.rates)[Object.keys(data.rates).indexOf('UAH')];
+            const { data } = await instance.get('/latest');
+            const firstCurrency = getCurrency(data, 'UAH');
             setCurrencies(Object.keys(data.rates));
             setConvertFrom(data.base);
             setConvertTo(firstCurrency);
-            setUsdToUahRate(
-                data.rates[firstCurrency] /
-                    data.rates[Object.keys(data.rates)[Object.keys(data.rates).indexOf('USD')]],
-            );
+            setUsdToUahRate(data.rates[firstCurrency] / data.rates[getCurrency(data, 'USD')]);
             setEurToUahRate(data.rates[firstCurrency]);
             setExchangeRate(data.rates[firstCurrency]);
         };
@@ -46,10 +41,8 @@ const App = () => {
     useEffect(() => {
         if (convertFrom && convertTo) {
             const updData = async () => {
-                const headers = { apikey: 'NclmKi9tsiZKmhZBJbpr9cLbFFzVa8NA' };
-                const { data } = await axios.get(
-                    `${baseURL}?base=${convertFrom}&symbols=${convertTo}`,
-                    { headers },
+                const { data } = await instance.get(
+                    '/latest?base=' + convertFrom + '&symbols=' + convertTo,
                 );
                 setExchangeRate(data.rates[convertTo]);
             };

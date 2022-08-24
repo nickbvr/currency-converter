@@ -7,7 +7,6 @@ const CurrencyRow = ({
     currencies,
     amount,
     onChangeAmount,
-    disabled,
 }) => {
     return (
         <CurrencyWrapper>
@@ -23,7 +22,6 @@ const CurrencyRow = ({
                 ))}
             </CurrencySelect>
             <CurrencyInput
-                disabled={disabled}
                 placeholder='0'
                 variant='standard'
                 type='number'
