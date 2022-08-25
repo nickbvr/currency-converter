@@ -14,6 +14,7 @@ const App = () => {
     const [eurToUahRate, setEurToUahRate] = useState();
     const [amount, setAmount] = useState(0);
     const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
+    const [isFetching, setIsFetching] = useState(true);
 
     let toAmount, fromAmount;
     if (amountInFromCurrency) {
@@ -41,10 +42,12 @@ const App = () => {
     useEffect(() => {
         if (convertFrom && convertTo) {
             const updData = async () => {
+                setIsFetching(true);
                 const { data } = await instance.get(
                     '/latest?base=' + convertFrom + '&symbols=' + convertTo,
                 );
                 setExchangeRate(data.rates[convertTo]);
+                setIsFetching(false);
             };
             updData();
         }
@@ -52,13 +55,13 @@ const App = () => {
 
     const handleFromChangeAmount = (e) => {
         let value = e.target.value;
-        if (value < 0) value = 0;
+        value < 0 && (value = 0);
         setAmount(value);
         setAmountInFromCurrency(true);
     };
     const handleToChangeAmount = (e) => {
         let value = e.target.value;
-        if (value < 0) value = 0;
+        value < 0 && (value = 0);
         setAmount(value);
         setAmountInFromCurrency(false);
     };
@@ -75,6 +78,7 @@ const App = () => {
                 setConvertTo={setConvertTo}
                 fromAmount={fromAmount}
                 toAmount={toAmount}
+                isFetching={isFetching}
                 handleFromChangeAmount={handleFromChangeAmount}
                 handleToChangeAmount={handleToChangeAmount}
             />

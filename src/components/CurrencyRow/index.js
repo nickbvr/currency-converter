@@ -7,6 +7,7 @@ const CurrencyRow = ({
     currencies,
     amount,
     onChangeAmount,
+    isFetching,
 }) => {
     return (
         <CurrencyWrapper>
@@ -22,6 +23,7 @@ const CurrencyRow = ({
                 ))}
             </CurrencySelect>
             <CurrencyInput
+                disabled={isFetching}
                 placeholder='0'
                 variant='standard'
                 type='number'

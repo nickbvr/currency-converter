@@ -3,6 +3,7 @@ import { Paper, Select, TextField } from '@mui/material';
 
 export const CurrencyWrapper = styled(Paper)`
     padding: 20px;
+    width: 314px;
     border-radius: 10px;
     box-shadow: none;
     display: flex;

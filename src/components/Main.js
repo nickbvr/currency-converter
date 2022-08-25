@@ -12,7 +12,15 @@ const Main = ({
     toAmount,
     handleToChangeAmount,
     handleFromChangeAmount,
+    isFetching,
 }) => {
+    const handleSwapCurrencies = () => {
+        if (!isFetching) {
+            setConvertTo(convertFrom);
+            setConvertFrom(convertTo);
+        }
+    };
+
     if (!currencies.length)
         return (
             <CircularProgress
@@ -45,9 +53,11 @@ const Main = ({
                     onChangeCurrency={(e) => setConvertFrom(e.target.value)}
                     amount={fromAmount}
                     onChangeAmount={handleFromChangeAmount}
+                    isFetching={isFetching}
                 />
                 <Divider />
                 <CurrencyExchangeRounded
+                    onClick={handleSwapCurrencies}
                     sx={{
                         position: 'absolute',
                         top: '50%',
@@ -55,6 +65,11 @@ const Main = ({
                         transform: 'translate(-50%,-50%)',
                         backgroundColor: '#fff',
                         fill: 'rgba(0, 0, 0, 0.15)',
+                        transition: '.3s',
+                        cursor: 'pointer',
+                        '&:hover': {
+                            fill: 'inherit',
+                        },
                     }}
                 />
                 <CurrencyRow
@@ -62,6 +77,7 @@ const Main = ({
                     selectedCurrency={convertTo}
                     onChangeCurrency={(e) => setConvertTo(e.target.value)}
                     amount={toAmount}
+                    isFetching={isFetching}
                     onChangeAmount={handleToChangeAmount}
                 />
             </Box>
