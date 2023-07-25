@@ -1,47 +1,61 @@
 {
-    "name": "currency-converter",
-    "version": "0.1.0",
-    "private": true,
-    "homepage": "https://nickbvr.github.io/currency-converter/",
-    "dependencies": {
-        "@emotion/react": "^11.10.0",
-        "@emotion/styled": "^11.10.0",
-        "@mui/icons-material": "^5.8.4",
-        "@mui/material": "^5.10.1",
-        "@testing-library/jest-dom": "^5.14.1",
-        "@testing-library/react": "^13.0.0",
-        "@testing-library/user-event": "^13.2.1",
-        "axios": "^0.27.2",
-        "normalize.css": "^8.0.1",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0",
-        "react-scripts": "5.0.1",
-        "web-vitals": "^2.1.0"
-    },
-    "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject",
-        "predeploy": "yarn run build",
-        "deploy": "gh-pages -d build"
-    },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    }
+  "name": "currency-exchange",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tsc": "tsc",
+    "lint": "eslint ./src --cache",
+    "lint:format": "prettier ./src --write --log-level silent",
+    "lint:fix": "eslint ./src --cache --fix --max-warnings=0",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@mui/icons-material": "^5.14.1",
+    "@mui/material": "^5.14.1",
+    "axios": "^1.4.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^14.0.0",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@types/styled-components": "^5.1.26",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
+    "@vitejs/plugin-react": "^4.0.3",
+    "eslint": "^8.45.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-n": "^16.0.1",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.3",
+    "jsdom": "^22.1.0",
+    "lint-staged": "^13.2.3",
+    "prettier": "^3.0.0",
+    "styled-components": "^5.3.11",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.4",
+    "vite-plugin-pwa": "^0.16.4",
+    "vitest": "^0.33.0"
+  },
+  "resolutions": {
+    "@mui/styled-engine": "npm:@mui/styled-engine-sc@^5.12.0"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "yarn lint:format",
+      "yarn lint:fix"
+    ]
+  }
 }
