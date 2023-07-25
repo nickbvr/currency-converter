@@ -6,7 +6,7 @@ import { PWAOptions } from './src/config/pwa'
 
 export default defineConfig({
   plugins: [react(), VitePWA(PWAOptions)],
-  base: '/currency-exchange/',
+  base: '/currency-converter/',
   server: {
     port: 3000,
   },
