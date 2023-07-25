@@ -17,8 +17,8 @@ jobs:
       - name: Build project
         run: yarn build
         env:
-          VITE_EXCHANGE_API_KEY: ${{vars.VITE_EXCHANGE_API_KEY}}
-          VITE_EXCHANGE_API_URL: ${{vars.VITE_EXCHANGE_API_URL}}
+          VITE_EXCHANGE_API_KEY: ${{secrets.VITE_EXCHANGE_API_KEY}}
+          VITE_EXCHANGE_API_URL: ${{secrets.VITE_EXCHANGE_API_URL}}
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
         with:
