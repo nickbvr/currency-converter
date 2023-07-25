@@ -17,7 +17,6 @@
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "incremental": true,
     "types": ["vite-plugin-pwa/client"],
     "baseUrl": ".",
     "paths": {
