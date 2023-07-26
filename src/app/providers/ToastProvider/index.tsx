@@ -1,7 +1,7 @@
-import { Snackbar } from '@mui/material'
+import { Slide, Snackbar } from '@mui/material'
 import { createContext, useCallback, useMemo, useState } from 'react'
 
-import type { AlertColor } from '@mui/material'
+import type { AlertColor, SlideProps } from '@mui/material'
 import type { ReactNode } from 'react'
 import type {
   ToastContextData,
@@ -21,6 +21,10 @@ interface Props {
 }
 
 export const ToastContext = createContext<ToastContextData | null>(null)
+
+function SlideTransition(props: SlideProps): JSX.Element {
+  return <Slide {...props} direction="left" />
+}
 
 export function ToastProvider({ children }: Props): JSX.Element {
   const [toast, setToast] = useState<ToastState>(INITIAL_PARAMS)
@@ -57,6 +61,7 @@ export function ToastProvider({ children }: Props): JSX.Element {
       {children}
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        TransitionComponent={SlideTransition}
         open={toast.isOpen}
         autoHideDuration={toast.autoHideDuration}
         onClose={handleClose}
