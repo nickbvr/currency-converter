@@ -1,15 +1,21 @@
 /* eslint-disable no-console */
 import { useState } from 'react'
 
-export const useLocalStorage = <T>(
+type StorageType = 'locale' | 'session'
+
+export const useBrowserStorage = <T>(
   key: string,
   initialValue: T,
+  storageType: StorageType = 'locale',
 ): readonly [T, (value: T | ((val: T) => T)) => void] => {
+  const storage =
+    storageType === 'locale' ? window.localStorage : window.sessionStorage
+
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (typeof window === 'undefined') return initialValue
 
     try {
-      const item = window.localStorage.getItem(key)
+      const item = storage.getItem(key)
 
       return item ? JSON.parse(item) : initialValue
     } catch (error) {
@@ -26,7 +32,7 @@ export const useLocalStorage = <T>(
       setStoredValue(valueToStore)
 
       if (typeof window !== 'undefined') {
-        window.localStorage.setItem(key, JSON.stringify(valueToStore))
+        storage.setItem(key, JSON.stringify(valueToStore))
       }
     } catch (error) {
       console.error(error)
