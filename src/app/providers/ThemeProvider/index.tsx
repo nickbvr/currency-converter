@@ -6,7 +6,7 @@ import type { ReactNode } from 'react'
 import type { ThemeContextData } from 'src/app/providers/ThemeProvider/types'
 
 import { getPreferredColorScheme } from 'src/app/providers/ThemeProvider/utils'
-import { useLocalStorage } from 'src/hooks/useLocalStorage'
+import { useBrowserStorage } from 'src/hooks/useBrowserStorage'
 
 import { getTheme } from 'src/styles/theme'
 
@@ -17,9 +17,10 @@ interface Props {
 export const ThemeContext = createContext<ThemeContextData | null>(null)
 
 export function ThemeProvider({ children }: Props): JSX.Element {
-  const [mode, setMode] = useLocalStorage<PaletteMode>(
+  const [mode, setMode] = useBrowserStorage<PaletteMode>(
     'theme',
     getPreferredColorScheme(),
+    'session',
   )
 
   const isDarkMode = useMemo(() => mode === 'dark', [mode])
